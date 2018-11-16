@@ -19,7 +19,7 @@ aside {
 	z-index: 2;
 }
 
-details[open] summary {
+details summary {
 	display: none;
 }
 

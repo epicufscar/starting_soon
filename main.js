@@ -11,9 +11,9 @@ window.onload = () => {
 	
 	document.querySelector("#fm_song").addEventListener("submit", fmLoadPlaylistHandle)
 
-	document.querySelector("#btn_prev").addEventListener("click", prevSongHandle)
-	document.querySelector("#btn_play_pause").addEventListener("click", playPauseSongHandle)
-	document.querySelector("#btn_next").addEventListener("click", nextSongHandle)
+	// document.querySelector("#btn_prev").addEventListener("click", prevSongHandle)
+	// document.querySelector("#btn_play_pause").addEventListener("click", playPauseSongHandle)
+	// document.querySelector("#btn_next").addEventListener("click", nextSongHandle)
 
 	document.querySelector("#s_count").innerText = count_text
 	document.querySelector("#s_count").setAttribute("data-text", count_text)
