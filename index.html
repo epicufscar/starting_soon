@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Comming Soon</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+	<script src="main.js"></script>
+</head>
+<body>
+	<header>
+		<details open>
+			<summary>Opções</summary>
+			<form id="fm_info">
+				<input type="text" id="ipt_org" title="Quem está organizando o evento" placeholder="EPiC - UFSCar">
+				<input type="text" id="ipt_title" title="Nome do evento" placeholder="Começaremos em breve" />
+			</form>
+			<form id="fm_time">
+				<input type="time" id="ipt_time_2_end" title="Horário em que o evento começará" />
+				<input type="submit" id="btn_start_stop_time" value="Começar" />
+			</form>
+			<form id="fm_add_time">
+				<input type="time" id="ipt_time_2_add" title="Adicionar mais tempo" />
+				<input type="submit" id="btn_add_time" value="Adicionar" />
+			</form>
+			<form id="fm_song">
+				<fieldset disabled>
+					<input type="url" id="ipt_playlist_url" title="URL da playlist de músicas" placeholder="URL ou código da playlist no YT" value="https://www.youtube.com/playlist?list=PLoQw91AtL5hZrI5W9oqhvXzPwgp6jva-x" />
+					<input type="submit" value="Carregar" />
+				</fieldset>
+				<div id="player"></div>
+				<input type="button" id="btn_prev" value="Previous" disabled />
+				<input type="button" id="btn_play_pause" value="Play/Pause" disabled />
+				<input type="button" id="btn_next" value="Next" disabled />
+			</form>
+		</details>
+	</header>
+	<main>
+		<h6 id="h_org"></h6>
+		<h1 id="h_title"></h1>
+		<span id="s_count">Começando em breve</span>
+	</main>
+	<script src="https://www.youtube.com/iframe_api" async></script>
+</body>
+</html>
