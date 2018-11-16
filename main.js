@@ -14,7 +14,14 @@ window.onload = () => {
 	document.querySelector("#btn_prev").addEventListener("click", prevSongHandle)
 	document.querySelector("#btn_play_pause").addEventListener("click", playPauseSongHandle)
 	document.querySelector("#btn_next").addEventListener("click", nextSongHandle)
+
+	document.querySelector("#s_count").innerText = count_text
+	document.querySelector("#s_count").setAttribute("data-text", count_text)
+
+	document.querySelector("#btn_exit_config").addEventListener("click", () => document.querySelector("summary").click())
+	document.querySelector("#btn_open_config").addEventListener("click", () => document.querySelector("summary").click())
 }
+const count_text = "Começaremos em breve!"
 
 const fmAddTimeHandle = () => {
 	clearTimeout(endTimeMessage) // Precisa parar o timeout aqui pois quando chamar o stopCoolDown, ele criará um novo timeout e o anterior continuará sendo executado mesmo que o novo seja parado dentro do fmTimeHandle
@@ -44,6 +51,7 @@ const fmInfoHandle = e => {
 	}
 	
 	document.querySelector(`#${ids[e.target.id]}`).innerHTML = e.target.value
+	document.querySelector(`#${ids[e.target.id]}`).setAttribute("data-text", e.target.value)
 }
 
 var countInterval = null,
@@ -78,7 +86,8 @@ const stopCoolDown = () => {
 	document.querySelector("#btn_start_stop_time").value = "Começar"
 	document.querySelector("#ipt_time_2_end").disabled = false;
 	endTimeMessage = setTimeout(() => {
-		document.querySelector("#s_count").innerText = "Começaremos em breve!"
+		document.querySelector("#s_count").innerText = count_text
+		document.querySelector("#s_count").setAttribute("data-text", count_text)
 	}, 5000)
 }
 
@@ -90,7 +99,9 @@ const coolDown = end => {
 		seconds: (Math.floor(Math.abs(end - now) / 1e3) % 60).toFixed(0).padStart(2, 0)
 	}
 	
-	document.querySelector("#s_count").innerHTML = `<b>${left.hours}</b>:${left.minutes}:<i>${left.seconds}</i>`
+	const text = `<b>${left.hours}</b>:${left.minutes}:<i>${left.seconds}</i>`
+	document.querySelector("#s_count").innerHTML = text
+	document.querySelector("#s_count").setAttribute("data-text", text.replace(/<\/?[^>]+(>|$)/g, ""))
 	
 	if (end <= now) stopCoolDown()
 }

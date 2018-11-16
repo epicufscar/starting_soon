@@ -9,37 +9,95 @@
 	<script src="main.js"></script>
 </head>
 <body>
-	<header>
+	<div id="player"></div>
+	<aside>
 		<details open>
 			<summary>Opções</summary>
-			<form id="fm_info">
-				<input type="text" id="ipt_org" title="Quem está organizando o evento" placeholder="EPiC - UFSCar">
-				<input type="text" id="ipt_title" title="Nome do evento" placeholder="Começaremos em breve" />
-			</form>
-			<form id="fm_time">
-				<input type="time" id="ipt_time_2_end" title="Horário em que o evento começará" />
-				<input type="submit" id="btn_start_stop_time" value="Começar" />
-			</form>
-			<form id="fm_add_time">
-				<input type="time" id="ipt_time_2_add" title="Adicionar mais tempo" />
-				<input type="submit" id="btn_add_time" value="Adicionar" />
-			</form>
-			<form id="fm_song">
-				<fieldset disabled>
-					<input type="url" id="ipt_playlist_url" title="URL da playlist de músicas" placeholder="URL ou código da playlist no YT" value="https://www.youtube.com/playlist?list=PLoQw91AtL5hZrI5W9oqhvXzPwgp6jva-x" />
-					<input type="submit" value="Carregar" />
-				</fieldset>
-				<div id="player"></div>
-				<input type="button" id="btn_prev" value="Previous" disabled />
-				<input type="button" id="btn_play_pause" value="Play/Pause" disabled />
-				<input type="button" id="btn_next" value="Next" disabled />
-			</form>
+			<section>
+				<div class="container">
+					<nav>
+						<span>Configurações</span>
+						<a href="#config_info">Informações</a>
+						<a href="#config_count">Contagem regressiva</a>
+						<a href="#config_song">Música</a>
+						<a>Atalhos</a>
+						<hr />
+						<a>Tema</a>
+					</nav>
+
+					<section>
+						<section id="config_info">
+							<header>
+								<h1>Detalhes do evento</h1>
+							</header>
+							<article>
+								<form id="fm_info">
+									<label for="#ipt_org">Organizadores</label>
+									<input type="text" id="ipt_org" title="Quem está organizando o evento" placeholder="EPiC - UFSCar">
+									<label for="#ipt_title">Evento</label>
+									<input type="text" id="ipt_title" title="Nome do evento" placeholder="Começaremos em breve" />
+								</form>
+							</article>
+						</section>
+						<hr />
+						<section id="config_count">
+							<header>
+								<h1>Contagem regressiva</h1>
+								<p>Tempo restante até o evento começar</p>
+							</header>
+							<article>
+								<form id="fm_time">
+									<label for="#ipt_time_2_end">Horário</label>
+									<div>
+										<input type="time" id="ipt_time_2_end" title="Horário em que o evento começará" />
+										<input type="submit" id="btn_start_stop_time" value="Começar" />
+									</div>
+								</form>
+								<form id="fm_add_time">
+									<label for="#ipt_time_2_add">Acrescentar tempo</label>
+									<div>
+										<input type="time" id="ipt_time_2_add" title="Adicionar mais tempo" />
+										<input type="submit" id="btn_add_time" value="Adicionar" />
+									</div>
+								</form>
+							</article>
+						</section>
+						<hr />
+						<section id="config_song">
+							<header>
+								<h1>Música de fundo</h1>
+								<p>Pra animar o pessoal</p>
+							</header>
+							<article>
+								<form id="fm_song">
+									<fieldset disabled>
+										<label for="#ipt_playlist_url">URL do YouTube</label>
+										<div>
+											<input type="url" id="ipt_playlist_url" title="URL da playlist de músicas" placeholder="URL ou código da playlist no YT" value="https://www.youtube.com/playlist?list=PLoQw91AtL5hZrI5W9oqhvXzPwgp6jva-x" />
+											<input type="submit" value="Carregar" />
+										</div>
+									</fieldset>
+								</form>
+								<!-- TODO: Substituir os constroles do vídeo por atalhos do teclado -->
+								<!-- <input type="button" id="btn_prev" value="Previous" disabled />
+								<input type="button" id="btn_play_pause" value="Play/Pause" disabled />
+								<input type="button" id="btn_next" value="Next" disabled /> -->
+							</article>
+						</section>
+					</section>
+					<div>
+						<button id="btn_exit_config">&times;</button>
+						<span>Esc</span>
+					</div>
+				</div>
+			</section>
 		</details>
-	</header>
+	</aside>
 	<main>
 		<h6 id="h_org"></h6>
 		<h1 id="h_title"></h1>
-		<span id="s_count">Começando em breve</span>
+		<span id="s_count"></span>
+		<button id="btn_open_config">&#9965;</button>
 	</main>
 	<script src="https://www.youtube.com/iframe_api" async></script>
 </body>
