@@ -267,27 +267,23 @@ section > hr {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
-	animation-name: rotate, fade;
-	animation-iteration-count: infinite;
-	animation-duration: 10s, 5s;
-	animation-delay: 5s, 0s;
-	animation-timing-function: cubic-bezier(0.12, 0.66, 0.03, 1.01), ease;
-	opacity: .4;
 	cursor: pointer;
 }
-@keyframes rotate {
-	from {
-		transform: rotateZ(0deg)
-	}
-	to {
-		transform: rotateZ(720deg)
-	}
+#btn_open_config:hover {
+	opacity: 1;
+}
+#btn_open_config:not(:hover) {
+	animation-name: fade;
+	animation-iteration-count: infinite;
+	animation-duration: 5s;
+	animation-timing-function: ease;
+	opacity: .2;
 }
 @keyframes fade {
-	90% {
-		opacity: 0;
+	80% {
+		opacity: .09;
 	}
 	100% {
-		opacity: .4;
+		opacity: .2;
 	}
 }
