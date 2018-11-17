@@ -8,6 +8,18 @@ html {
 	pointer-events: none;
 }
 
+/* Espaçamento do topo em âncoras quando são destacadas */
+/* VARS */ :target:before {
+	--anchor_space: 90px;
+}
+:target:before {
+	content: "";
+	display: block;
+	visibility: hidden;
+	height: var(--anchor_space);
+	margin: calc(0px - var(--anchor_space)) 0 0;
+}
+
 /* VARS */ aside {
 	--nav_w: 200px;
 	--left_bg_color: #f3f3f3;
