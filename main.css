@@ -31,10 +31,28 @@ aside {
 	z-index: 2;
 }
 
+nav #our-media {
+	display: flex;
+	flex-flow: row wrap;
+	padding-right: 4px;
+	padding-left: 4px;
+}
+nav #our-media a:focus, nav #our-media a:active {
+	color: #b9bbbe;
+	background-color: transparent;
+}
+nav #our-media a:hover {
+	color: #72767d;
+	background-color: transparent;
+}
+nav #our-media a {
+	color: #b9bbbe;
+	margin: 3px;
+}
+
 details summary {
 	display: none;
 }
-
 details > section {
 	background-image: linear-gradient(to right, var(--left_bg_color) 50%, var(--right_bg_color) 50%);
 	width: 100vw;
