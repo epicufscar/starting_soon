@@ -18,8 +18,14 @@ window.onload = () => {
 	document.querySelector("#s_count").innerText = count_text
 	document.querySelector("#s_count").setAttribute("data-text", count_text)
 
-	document.querySelector("#btn_exit_config").addEventListener("click", () => document.querySelector("summary").click())
-	document.querySelector("#btn_open_config").addEventListener("click", () => document.querySelector("summary").click())
+	document.querySelector("#btn_exit_config").addEventListener("click", atalhoFecharConfigHandle)
+	document.querySelector("#btn_open_config").addEventListener("click", atalhoAbrirConfigHandle)
+	atalhoAbrirConfigHandle()
+
+	document.querySelectorAll("#fm_atal input").forEach(element => {
+		element.addEventListener("focusin", iptAlterarAtalhoHandleOnFocusIn)
+		element.addEventListener("focusout", iptAlterarAtalhoHandleOnFocusOut)
+	})
 }
 const count_text = "Começaremos em breve!"
 
@@ -122,8 +128,8 @@ const fmLoadPlaylistHandle = () => {
 		})
 		player.setLoop(true)
 
-		document.querySelector("#btn_prev").disabled = false
-		document.querySelector("#btn_next").disabled = false
+		// document.querySelector("#btn_prev").disabled = false
+		// document.querySelector("#btn_next").disabled = false
 	} else if (video_id) {
 		player.loadVideoById({
 			videoId: video_id
@@ -131,8 +137,8 @@ const fmLoadPlaylistHandle = () => {
 		//TODO: setLoop é apenas para listas
 		//player.setLoop(true)
 
-		document.querySelector("#btn_prev").disabled = true
-		document.querySelector("#btn_next").disabled = true
+		// document.querySelector("#btn_prev").disabled = true
+		// document.querySelector("#btn_next").disabled = true
 	}
 }
 
@@ -153,9 +159,9 @@ function onPlayerReady() {
 	player.setPlaybackQuality('small')
 }
 function onPlayerStateChange(e) {
-	document.querySelector("#btn_play_pause").value = e.data == YT.PlayerState.PLAYING ? "Pausar" : e.data == YT.PlayerState.BUFFERING ? "Carregando" : "Reproduzir"
+	// document.querySelector("#btn_play_pause").value = e.data == YT.PlayerState.PLAYING ? "Pausar" : e.data == YT.PlayerState.BUFFERING ? "Carregando" : "Reproduzir"
 
-	document.querySelector("#btn_play_pause").disabled = e.data == YT.PlayerState.BUFFERING
+	// document.querySelector("#btn_play_pause").disabled = e.data == YT.PlayerState.BUFFERING
 }
 function onPlayerError(e) {
 	nextSongHandle()
@@ -166,11 +172,14 @@ function onPlayerError(e) {
 const prevSongHandle = () => {
 	player.previousVideo()
 }
-const playPauseSongHandle = () => {
+const playSongHandle = () => {
+	if (player.getPlayerState() != YT.PlayerState.PLAYING) {
+		player.playVideo()
+	}
+}
+const pauseSongHandle = () => {
 	if (player.getPlayerState() == YT.PlayerState.PLAYING) {
 		player.pauseVideo()
-	} else {
-		player.playVideo()
 	}
 }
 const nextSongHandle = () => {
