@@ -10,12 +10,15 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 	<link rel="stylesheet" href="themes/blue_flare.css">
 	
+	<script src="https://codepen.io/Alynva/pen/dQzgqp.js"></script>
+	<script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 	<script src="main.js"></script>
+	<script src="hotkeys.js"></script>
 </head>
 <body>
-	<div id="player"></div>
+	<div id="player" tabindex="-1"></div>
 	<aside>
-		<details open>
+		<details>
 			<summary>Opções</summary>
 			<section>
 				<div class="container">
@@ -24,10 +27,10 @@
 						<a href="#config_info">Informações</a>
 						<a href="#config_count">Contagem regressiva</a>
 						<a href="#config_song">Música</a>
-						<a>Tema</a>
+						<a href="#config_tema">Tema</a>
 						<hr />
 						<span>Configurações do site</span>
-						<a>Atalhos</a>
+						<a href="#config_atal">Atalhos do teclado</a>
 						<hr />
 						<div id="our-media">
 							<a href="http://epic.ufscar.site" target="_blank"><i class="fas fa-globe fa-lg fa-fw"></i></a>
@@ -45,9 +48,9 @@
 							<article>
 								<form id="fm_info">
 									<label for="#ipt_org">Organizadores</label>
-									<input type="text" id="ipt_org" title="Quem está organizando o evento" placeholder="EPiC - UFSCar">
+									<input type="text" id="ipt_org" title="Quem está organizando o evento" placeholder="EPiC - UFSCar" tabindex="1">
 									<label for="#ipt_title">Evento</label>
-									<input type="text" id="ipt_title" title="Nome do evento" placeholder="Começaremos em breve" />
+									<input type="text" id="ipt_title" title="Nome do evento" placeholder="Começaremos em breve" tabindex="2" />
 								</form>
 							</article>
 						</section>
@@ -60,14 +63,14 @@
 							<article>
 								<form id="fm_time">
 									<label for="#ipt_time_2_end">Horário</label>
-									<div>
+									<div class="mesclar">
 										<input type="time" id="ipt_time_2_end" title="Horário em que o evento começará" />
 										<input type="submit" id="btn_start_stop_time" value="Começar" />
 									</div>
 								</form>
 								<form id="fm_add_time">
 									<label for="#ipt_time_2_add">Acrescentar tempo</label>
-									<div>
+									<div class="mesclar">
 										<input type="time" id="ipt_time_2_add" title="Adicionar mais tempo" />
 										<input type="submit" id="btn_add_time" value="Adicionar" />
 									</div>
@@ -84,7 +87,7 @@
 								<form id="fm_song">
 									<fieldset disabled>
 										<label for="#ipt_playlist_url">URL do YouTube</label>
-										<div>
+										<div class="mesclar">
 											<input type="url" id="ipt_playlist_url" title="URL da playlist de músicas" placeholder="URL ou código da playlist no YT" value="https://www.youtube.com/playlist?list=PLoQw91AtL5hZrI5W9oqhvXzPwgp6jva-x" />
 											<input type="submit" value="Carregar" />
 										</div>
@@ -94,6 +97,106 @@
 								<!-- <input type="button" id="btn_prev" value="Previous" disabled />
 								<input type="button" id="btn_play_pause" value="Play/Pause" disabled />
 								<input type="button" id="btn_next" value="Next" disabled /> -->
+							</article>
+						</section>
+						<hr />
+						<section id="config_tema">
+							<header>
+								<h1>Temas</h1>
+							</header>
+							<article>
+							</article>
+						</section>
+						<hr />
+						<section id="config_atal">
+							<header>
+								<h1>Atalhos do teclado</h1>
+								<p>Alguns atalhos foram alterados - <a>restaurar padrão</a></p>
+							</header>
+							<article>
+								<form id="fm_atal">
+									<div>
+										<label for="ipt_keyword_open_config">Abrir as configurações</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_open_config" data-atalho="abrirConfig">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+										<p>Exibe o menu de opções</p>
+									</div>
+									<div>
+										<label for="ipt_keyword_close_config">Fechar as configurações</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_close_config" data-atalho="fecharConfig">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+										<p>Oculta o menu de opções</p>
+									</div>
+									<hr />
+									<div>
+										<label for="ipt_keyword_play_music">Reproduzir música</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_play_music" data-atalho="tocarMusica">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+									<div>
+										<label for="ipt_keyword_pausar_music">Pausar música</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_pause_music" data-atalho="pausarMusica">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+									<div>
+										<label for="ipt_keyword_prev_music">Música anterior</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_prev_music" data-atalho="musicaAnterior">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+									<div>
+										<label for="ipt_keyword_next_music">Próxima música</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_next_music" data-atalho="proximaMusica">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+									<hr />
+									<div>
+										<label for="ipt_keyword_edit_info">Editar informações do evento</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_edit_info" data-atalho="detacarInfo">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+									<div>
+										<label for="ipt_keyword_edit_count">Editar contagem regressiva</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_edit_count" data-atalho="detacarCont">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+									<div>
+										<label for="ipt_keyword_edit_music">Editar música de fundo</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_edit_music" data-atalho="detacarMusi">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+									<div>
+										<label for="ipt_keyword_edit_theme">Editar tema</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_edit_theme" data-atalho="detacarTema">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+									<div>
+										<label for="ipt_keyword_edit_atal">Editar atalhos</label>
+										<div class="mesclar">
+											<input type="text" id="ipt_keyword_edit_hotkey" data-atalho="detacarAtal">
+											<button data-text="Parar gravação">Editar atalho</button>
+										</div>
+									</div>
+								</form>
 							</article>
 						</section>
 					</section>

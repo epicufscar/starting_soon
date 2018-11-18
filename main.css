@@ -82,7 +82,7 @@ details nav {
 nav > * {
 	padding: 8px 10px;
 }
-nav span {
+nav > span {
 	text-transform: uppercase;
 	font-size: 9pt;
 	color: #b9c0d0;
@@ -141,8 +141,8 @@ details header > h1 {
 	font-size: 13pt;
 	font-weight: bold;
 }
-details header > p {
-	margin: 0;
+/* details header >  */p {
+	margin: 5px 0 0;
 	font-size: 8pt;
 	color: #b4b6b9;
 }
@@ -155,13 +155,67 @@ form, fieldset {
 	flex-direction: row;
 	margin: 0 -5px;
 }
-#fm_time, #fm_add_time {
+#config_count form {
 	flex-basis: 0;
 	flex-grow: 1;
 	margin: 0 5px;
 }
 #fm_song input[type=url] {
 	padding-right: 100px;
+}
+#config_atal form {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	margin: 0 -5px;
+}
+#config_atal form > div {
+	flex: 0 0 50%;
+	max-width: calc(50% - 10px);
+	margin: 15px 5px;
+}
+#config_atal input {
+	cursor: pointer;
+}
+#config_atal input:hover, #config_atal input:focus, #config_atal input.gravando {
+	border-color: #f2bfbf;
+}
+#config_atal input.gravando {
+	color: #f04747;
+	animation: animacao_gravando .4s infinite alternate ease;
+}
+#config_atal input.gravando ~ button {
+	font-size: 0;
+}
+#config_atal input.gravando ~ button::before {
+	content: attr(data-text);
+	font-size: initial;
+}
+@keyframes animacao_gravando {
+	from {
+		box-shadow: 0 0 8px -3px rgb(255, 0, 0);
+	}
+	to {
+		box-shadow: 0 0 13px -3px rgb(255, 0, 0);
+	}
+}
+#config_atal input.gravando ~ button {
+	background-color: #f2e1e3 !important;
+	color: #f06847
+}
+#config_atal input:not(.gravando) ~ button {
+	pointer-events: none;
+}
+#config_atal input:not(.gravando):not(:hover) ~ button {
+	font-size: 0;
+}
+#config_atal input:not(.gravando):not(:hover) ~ button::after {
+    font-size: 15pt;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+	content: "\f11c";
+	color: #333;
 }
 form label {
 	color: #72767d;
@@ -170,7 +224,8 @@ form label {
 	text-transform: uppercase;
 	margin: 17px 0 9px;
 }
-form input {
+form input, form button {
+	outline: none;
 	width: 100%;
 	padding: 13px;
 	border: solid 1px #c7c9cb;
@@ -181,34 +236,34 @@ form input {
 	font-size: 12pt;
 	text-overflow: ellipsis;
 }
+input[type=submit], form button {
+	background-color: #edeef1 !important;
+	border: 0 !important;
+	color: #7f8993;
+	cursor: pointer;
+}
 form input:disabled {
 	background-color: #fcfcfd;
 	border-color: #eaeaea;
 	cursor: not-allowed;
 }
-form input:active {
+form input:active, form input:focus {
 	border-color: #7289da;
-}
-form div {
-	position: relative;
 }
 form input[type=time] {
 	padding-right: 100px;
 	height: 49px;
 }
-form input ~ input[type=submit] {
+form div.mesclar {
+	position: relative;
+}
+form div.mesclar input ~ input[type=submit], form div.mesclar input ~ button {
 	position: absolute;
 	right: 0;
 	top: 0;
 	width: fit-content;
 	margin: 5px;
 	padding: 9px;
-}
-input[type=submit] {
-	background-color: #edeef1;
-	border: 0;
-	color: #7f8993;
-	cursor: pointer;
 }
 
 fieldset {
@@ -268,6 +323,7 @@ section > hr {
 	right: 10px;
 	bottom: 10px;
 	cursor: pointer;
+	outline: none;
 }
 #btn_open_config:hover {
 	opacity: 1;
