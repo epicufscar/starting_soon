@@ -4,10 +4,6 @@
 	Versão original: Steam Elements
 */
 
-body {
-	margin: 0;
-}
-
 main {
 	position: relative;
 	z-index: 1;
@@ -49,7 +45,7 @@ main {
 	--ball_shadow_spread: 0px;
 }
 #h_org:empty {
-	display: none;
+	visibility: hidden;
 }
 #h_org {
 	font-family: Righteous;
