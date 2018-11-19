@@ -144,8 +144,8 @@ const fmLoadPlaylistHandle = () => {
 
 function onYouTubeIframeAPIReady() {
 	player = new YT.Player('player', {
-		height: '1',
-		width: '1',
+		// height: '1',
+		// width: '1',
 		events: {
 			'onReady': onPlayerReady,
 			'onStateChange': onPlayerStateChange,

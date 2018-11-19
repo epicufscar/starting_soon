@@ -2,12 +2,6 @@ html {
 	overflow: hidden;
 }
 
-#player {
-	position: absolute;
-	opacity: 0;
-	pointer-events: none;
-}
-
 /* Espaçamento do topo em âncoras quando são destacadas */
 /* VARS */ :target:before {
 	--anchor_space: 30px;
