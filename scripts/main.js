@@ -11,6 +11,8 @@ window.onload = () => {
 	
 	document.querySelector("#fm_song").addEventListener("submit", fmLoadPlaylistHandle)
 
+	document.querySelector("#fm_theme").addEventListener("change", fmThemeHandle)
+
 	// document.querySelector("#btn_prev").addEventListener("click", prevSongHandle)
 	// document.querySelector("#btn_play_pause").addEventListener("click", playPauseSongHandle)
 	// document.querySelector("#btn_next").addEventListener("click", nextSongHandle)
@@ -144,8 +146,8 @@ const fmLoadPlaylistHandle = () => {
 
 function onYouTubeIframeAPIReady() {
 	player = new YT.Player('player', {
-		height: '1',
-		width: '1',
+		// height: '1',
+		// width: '1',
 		events: {
 			'onReady': onPlayerReady,
 			'onStateChange': onPlayerStateChange,
@@ -184,4 +186,36 @@ const pauseSongHandle = () => {
 }
 const nextSongHandle = () => {
 	player.nextVideo()
+}
+
+const fmThemeHandle = e => {
+	const theme_name = e.target.value,
+		style_id = "theme_style",
+		script_id = "theme_script"
+
+	let style = document.head.querySelector(`#${style_id}`),
+		script = document.head.querySelector(`#${script_id}`)
+
+	if (theme_name != "none") {
+		if (style === null) {
+			style = document.createElement("link")
+			style.setAttribute("rel", "stylesheet")
+			style.setAttribute("type", "text/css")
+			style.setAttribute("id", style_id)
+			document.head.appendChild(style)
+		}
+
+		style.setAttribute("href", `themes/${theme_name}/${theme_name}.css`)
+		
+		if (script === null) {
+			script = document.createElement("script")
+			script.setAttribute("id", script_id)
+			document.head.appendChild(script)
+		}
+
+		script.setAttribute("src", `themes/${theme_name}/${theme_name}.css`)
+	} else {
+		if (style !== null) style.parentElement.removeChild(style)
+		if (script !== null) script.parentElement.removeChild(script)
+	}
 }

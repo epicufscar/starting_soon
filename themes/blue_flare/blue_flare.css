@@ -4,20 +4,28 @@
 	Versão original: Steam Elements
 */
 
-body {
-	margin: 0;
-}
-
 main {
 	position: relative;
 	z-index: 1;
 	height: 100vh;
 	background-image: url(https://cdn.streamelements.com/uploads/89dd6170-4b06-4293-b003-c80596613544.png);
+	background-color: #000;
 	background-position: center;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+#player {
+	position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .2;
+    pointer-events: none;
+    filter: blur(2px);
 }
 
 /* VARS */ #h_org {
@@ -37,7 +45,7 @@ main {
 	--ball_shadow_spread: 0px;
 }
 #h_org:empty {
-	display: none;
+	visibility: hidden;
 }
 #h_org {
 	font-family: Righteous;

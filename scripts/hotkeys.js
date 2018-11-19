@@ -56,7 +56,6 @@ const definirAtalhoTocarMusica = () => {
 	const key = atalhos.tocarMusica || atalhos._tocarMusica
 	hotkeys(key, playSongHandle)
 	atualizarAtalhoNoInput("#ipt_keyword_play_music", key)
-	console.log('atalho tocar', key)
 }
 const definirAtalhoPausarMusica = () => {
 	const key = atalhos.pausarMusica || atalhos._pausarMusica

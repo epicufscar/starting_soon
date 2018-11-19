@@ -3,20 +3,18 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Comming Soon</title>
+	<title>Começando em breve</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-	<link rel="stylesheet" href="themes/blue_flare.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
 	
-	<script src="https://codepen.io/Alynva/pen/dQzgqp.js"></script>
 	<script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
-	<script src="main.js"></script>
-	<script src="hotkeys.js"></script>
+	<script src="scripts/main.js"></script>
+	<script src="scripts/keycodes.js"></script>
+	<script src="scripts/hotkeys.js"></script>
 </head>
 <body>
-	<div id="player" tabindex="-1"></div>
 	<aside>
 		<details>
 			<summary>Opções</summary>
@@ -33,10 +31,10 @@
 						<a href="#config_atal">Atalhos do teclado</a>
 						<hr />
 						<div id="our-media">
-							<a href="http://epic.ufscar.site" target="_blank"><i class="fas fa-globe fa-lg fa-fw"></i></a>
-							<a href="https://www.facebook.com/epicufscar" target="_blank"><i class="fab fa-facebook fa-lg fa-fw"></i></a>
-							<a href="https://www.linkedin.com/company/epic-ufscar/" target="_blank"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
-							<a href="https://github.com/epicufscar" target="_blank"><i class="fab fa-github-square fa-lg fa-fw"></i></a>
+							<a href="http://epic.ufscar.site" target="_blank"><i class="fas fa-globe fa-lg"></i></a>
+							<a href="https://www.facebook.com/epicufscar" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+							<a href="https://www.linkedin.com/company/epic-ufscar/" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
+							<a href="https://github.com/epicufscar" target="_blank"><i class="fab fa-github-square fa-lg"></i></a>
 						</div>
 					</nav>
 
@@ -105,6 +103,28 @@
 								<h1>Temas</h1>
 							</header>
 							<article>
+								<form id="fm_theme">
+									<label>
+										<input type="radio" name="theme" value="none" checked />
+										<img class="theme_preview" src="themes/none.png" alt="Nenhum tema">
+									</label>
+									<label>
+										<input type="radio" name="theme" value="blue_flare" />
+										<img class="theme_preview" src="themes/blue_flare/blue_flare.png" alt="Capa do tema Blue Flare">
+									</label>
+								</form>
+								<section>
+									<header>
+										<h2>Alterar tema</h2>
+										<p>Para alguns temas, você poderá alterar suas configurações
+											.</p>
+									</header>
+									<article>
+										<form id="fm_config_thema">
+											
+										</form>
+									</article>
+								</section>
 							</article>
 						</section>
 						<hr />
@@ -209,6 +229,7 @@
 		</details>
 	</aside>
 	<main>
+		<div id="player" tabindex="-1"></div>
 		<h6 id="h_org"></h6>
 		<h1 id="h_title"></h1>
 		<span id="s_count"></span>

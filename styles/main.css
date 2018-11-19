@@ -2,15 +2,13 @@ html {
 	overflow: hidden;
 }
 
-#player {
-	position: absolute;
-	opacity: 0;
-	pointer-events: none;
+body {
+	margin: 0;
 }
 
 /* Espaçamento do topo em âncoras quando são destacadas */
 /* VARS */ :target:before {
-	--anchor_space: 90px;
+	--anchor_space: 30px;
 }
 :target:before {
 	content: "";
@@ -136,16 +134,32 @@ details > section > .container > section {
 details header {
 	margin-bottom: 8px;
 }
-details header > h1 {
+details header > h1, details header > h2 {
 	margin: 0 0 5px;
-	font-size: 13pt;
 	font-weight: bold;
+}
+details header > h1 {
+	font-size: 13pt;
+}
+details header > h2 {
+	font-size: 8pt;
+	color: #a7abaf;
 }
 /* details header >  */p {
 	margin: 5px 0 0;
 	font-size: 8pt;
 	color: #b4b6b9;
 }
+
+article > section {
+	background-color: #f8f9f9;
+	border: 1px solid #dcddde;
+	border-radius: 3px;
+	padding: 23px 20px;
+	margin: 15px 0;
+}
+
+
 form, fieldset {
 	display: flex;
 	flex-direction: column;
@@ -162,6 +176,38 @@ form, fieldset {
 }
 #fm_song input[type=url] {
 	padding-right: 100px;
+}
+#fm_theme {
+	display: flex;
+	flex-direction: row;
+	margin: -4px;
+}
+#fm_theme > * {
+	margin: 4px;
+}
+#fm_theme [type=radio] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+#fm_theme [type=radio] + img {
+	cursor: pointer;
+}
+#fm_theme [type=radio]:checked + img {
+	border-color: #7289da;
+	background-color: #7289da;
+}
+#fm_theme .theme_preview:hover {
+	border-color: #72767d;
+}
+#fm_theme .theme_preview {
+	width: 80px;
+	height: 80px;
+	object-fit: cover;
+	padding: 3px;
+	border: 1px solid #dcddde;
+	border-radius: 3px;
 }
 #config_atal form {
 	display: flex;
