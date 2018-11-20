@@ -28,6 +28,8 @@ window.onload = () => {
 		element.addEventListener("focusin", iptAlterarAtalhoHandleOnFocusIn)
 		element.addEventListener("focusout", iptAlterarAtalhoHandleOnFocusOut)
 	})
+
+	Musica.mostrarSugestoes()
 }
 const count_text = "Começaremos em breve!"
 
@@ -167,8 +169,19 @@ function onPlayerStateChange(e) {
 }
 function onPlayerError(e) {
 	nextSongHandle()
-	console.error(e)
-	throw new Error("Ocorrou um erro no player do YT")
+	switch (e.data) {
+		case 2:
+			throw Error("Erro no player do YouTube: A solicitação contém um valor de parâmetro inválido. Por exemplo, este erro ocorre se você especificar um ID de vídeo que não tem 11 caracteres, ou se o ID de vídeo contém caracteres inválidos, como pontos de exclamação ou asteriscos.")
+		case 5:
+			throw Error("Erro no player do YouTube: O conteúdo solicitado não pode ser reproduzido em um player HTML5, ou ocorreu outro erro relacionado ao player HTML5.")
+		case 100:
+			throw Error("Erro no player do YouTube: O vídeo solicitado não foi encontrado. Esse erro ocorrerá quando um vídeo tiver sido removido (por qualquer motivo) ou marcado como privado.")
+		case 101:
+		case 150:
+			throw Error("Erro no player do YouTube: O proprietário do vídeo solicitado não permite que ele seja reproduzido em players incorporados.")
+		default:
+			throw Error("Ocorrou um erro desconhecido no player do YouTube.")
+	}
 }
 
 const prevSongHandle = () => {
