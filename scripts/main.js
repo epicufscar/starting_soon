@@ -28,6 +28,8 @@ window.onload = () => {
 		element.addEventListener("focusin", iptAlterarAtalhoHandleOnFocusIn)
 		element.addEventListener("focusout", iptAlterarAtalhoHandleOnFocusOut)
 	})
+
+	Musica.mostrarSugestoes()
 }
 const count_text = "Começaremos em breve!"
 

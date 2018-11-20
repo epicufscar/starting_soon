@@ -6,13 +6,18 @@
 	<title>Começando em breve</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<!-- FontAwesome Webfont -->
+	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
 	<link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
 	
+	<!-- FontAwesome SVG -->
+	<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
+
 	<script src="scripts/main.js"></script>
 	<script src="scripts/keycodes.js"></script>
 	<script src="scripts/hotkeys.js"></script>
+	<script src="scripts/musica.js"></script>
 </head>
 <body>
 	<aside>
@@ -86,9 +91,23 @@
 									<fieldset disabled>
 										<label for="#ipt_playlist_url">URL do YouTube</label>
 										<div class="mesclar">
-											<input type="url" id="ipt_playlist_url" title="URL da playlist de músicas" placeholder="URL ou código da playlist no YT" value="https://www.youtube.com/playlist?list=PLoQw91AtL5hZrI5W9oqhvXzPwgp6jva-x" />
+											<input type="url" id="ipt_playlist_url" title="URL da playlist de músicas" placeholder="URL ou código da playlist no YT" />
 											<input type="submit" value="Carregar" />
 										</div>
+										<section>
+											<span>Sugestões: </span>
+											<ul id="sugestoes">
+												<div class="icones_clonaveis">
+													<span class="fa-layers fa-fw fa-sm">
+														<i class="fas fa-square-full" data-fa-transform="shrink-8 right-4 down-2.7" data-fa-mask="fas fa-bars"></i>
+														<i class="fas fa-play" data-fa-transform="shrink-8 right-6 down-4"></i>
+													</span>
+													<span class="fa-layers fa-fw fa-sm">
+														<i class="fas fa-music"></i>
+													</span>
+												</div>
+											</ul>
+										</section>
 									</fieldset>
 								</form>
 							</article>
