@@ -410,33 +410,3 @@ section > hr {
 	font-size: 10pt;
 	color: #ccc;
 }
-
-#btn_open_config {
-	font-size: 21pt;
-	line-height: 21pt;
-	background: transparent;
-	border: none;
-	position: absolute;
-	right: 10px;
-	bottom: 10px;
-	cursor: pointer;
-	outline: none;
-}
-#btn_open_config:hover {
-	opacity: 1;
-}
-#btn_open_config:not(:hover) {
-	animation-name: fade;
-	animation-iteration-count: infinite;
-	animation-duration: 5s;
-	animation-timing-function: ease;
-	opacity: .2;
-}
-@keyframes fade {
-	80% {
-		opacity: .09;
-	}
-	100% {
-		opacity: .2;
-	}
-}
