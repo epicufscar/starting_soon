@@ -228,6 +228,15 @@ form, fieldset {
 #fm_song #sugestoes .sugestao_item.song .fa-layers {
 	background-color: var(--song_color)
 }
+#fm_song #playlist_details #playlist_controls {
+	display: flex;
+	flex-direction: row;
+}
+#fm_song #playlist_details #playlist_controls button {
+	border: none;
+	background: none;
+	margin: 5px
+}
 #fm_theme {
 	display: flex;
 	flex-direction: row;
