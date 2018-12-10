@@ -226,7 +226,7 @@ const fmThemeHandle = e => {
 			document.head.appendChild(script)
 		}
 
-		script.setAttribute("src", `themes/${theme_name}/${theme_name}.css`)
+		script.setAttribute("src", `themes/${theme_name}/${theme_name}.js`)
 	} else {
 		if (style !== null) style.parentElement.removeChild(style)
 		if (script !== null) script.parentElement.removeChild(script)
