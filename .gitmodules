@@ -1,0 +1,3 @@
+[submodule "themes/ss_flare"]
+	path = themes/ss_flare
+	url = https://github.com/Alynva/ss_flare.git
