@@ -55,6 +55,12 @@ class Musica {
 	}
 
 	static fmLoadPlaylistHandle() {
+		document.querySelector("#fm_song > fieldset").disabled = true;
+				
+		document.querySelector("#playlist_details").classList.add("hide");
+		document.querySelector("#playlist_details > header p span").classList.add("hide");
+		document.querySelector("#playlist_details > article").classList.add("hide");
+
 		const ipt_element = document.querySelector("#ipt_playlist_url"),
 			url = new URL(ipt_element.value),
 			searchParams = new URLSearchParams(url.search),
@@ -63,16 +69,111 @@ class Musica {
 			video_id = searchParams.get('v')
 
 		if (playlist_id) {
+			Musica._loadPlaylistInfo(playlist_id)
+
 			player.loadPlaylist({
 				list: playlist_id,
 				index: index_playing || 0
 			})
 			player.setLoop(true)
 		} else if (video_id) {
+			Musica._loadVideoInfo(video_id)
+
 			player.loadVideoById({
 				videoId: video_id
 			})
 		}
+	}
+
+	static _loadPlaylistInfo(playlist_id) {
+		fetch(`${YT_API_ENDPOINT_BASE}playlists?key=${YT_API_KEY}&part=snippet&id=${playlist_id}`)
+			.then(response => response.json())
+			.then(data => {
+				const playlist_data = data.items[0].snippet
+
+				document.querySelector("#playlist_details h2").innerText = playlist_data.title
+
+				document.querySelector("#playlist_details p a").href = `https://www.youtube.com/channel/${playlist_data.channelId}`
+				document.querySelector("#playlist_details p a").innerText = playlist_data.channelTitle
+				
+				document.querySelector("#playlist_details").classList.remove("hide");
+			})
+			.catch(err => {
+				console.error(err)
+			})
+			.then(() => {
+				document.querySelector("#fm_song > fieldset").disabled = false;
+			})
+
+		fetch(`${YT_API_ENDPOINT_BASE}playlistItems?key=${YT_API_KEY}&part=snippet&playlistId=${playlist_id}`)
+			.then(response => response.json())
+			.then(data => {
+				if (data.error) throw data.error
+				console.log(data)
+
+				const indexNow = document.querySelector("#playlist_details header p span span:first-child"),
+					totalIndex = document.querySelector("#playlist_details header p span span:last-child")
+
+				indexNow.innerText = 1
+				totalIndex.innerText = data.pageInfo.totalResults
+
+				document.querySelector("#playlist_details header p span").classList.remove("hide")
+
+				const playlist_videos = data.items
+
+				const videos_list = []
+				playlist_videos.forEach(video => {
+					videos_list.push({
+						id: video.snippet.resourceId.videoId,
+						position: video.snippet.position,
+						thumbnail: video.snippet.thumbnails.default.url,
+						title: video.snippet.title,
+						channelTitle: video.snippet.channelTitle
+					})
+				})
+
+
+				const ul = document.querySelector("#playlist_details article ul")
+				ul.innerHTML = ""
+				videos_list.forEach(video => {
+
+					const li = document.createElement("li")
+					const a = document.createElement("a")
+					a.href = "#"
+
+					const position = document.createElement("span")
+					position.innerText = video.position
+					a.appendChild(position) // ▶
+
+					const img = document.createElement("img")
+					img.src = video.thumbnail
+					img.alt = "video thumbnail"
+					a.appendChild(img)
+
+					const div = document.createElement("div")
+
+					const title = document.createElement("h3")
+					title.innerText = video.title
+					div.appendChild(title)
+
+					const channel = document.createElement("span")
+					channel.innerText = video.channelTitle
+					div.appendChild(channel)
+
+					a.appendChild(div)
+					li.appendChild(a)
+					ul.appendChild(li)
+				})
+
+				document.querySelector("#playlist_details > article").classList.remove("hide");
+			})
+			.catch(err => {
+				console.error(err)
+			})
+	}
+
+	static _loadVideoInfo(video_id) {
+
 	}
 
 	static _escolherSugestoes() {
@@ -165,3 +266,5 @@ class Musica {
 	}
 }
 var player;
+const YT_API_ENDPOINT_BASE = "https://www.googleapis.com/youtube/v3/"
+const YT_API_KEY = "AIzaSyAC7T2lo7i_HkV5enRkDiAKWgLGJFnm2nU"
