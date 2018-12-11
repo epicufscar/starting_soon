@@ -54,22 +54,22 @@ const definirTodosAtalhos = () => {
 
 const definirAtalhoTocarMusica = () => {
 	const key = atalhos.tocarMusica || atalhos._tocarMusica
-	hotkeys(key, playSongHandle)
+	hotkeys(key, Musica.playSongHandle)
 	atualizarAtalhoNoInput("#ipt_keyword_play_music", key)
 }
 const definirAtalhoPausarMusica = () => {
 	const key = atalhos.pausarMusica || atalhos._pausarMusica
-	hotkeys(key, pauseSongHandle)
+	hotkeys(key, Musica.pauseSongHandle)
 	atualizarAtalhoNoInput("#ipt_keyword_pause_music", key)
 }
 const definirAtalhoMusicaAnterior = () => {
 	const key = atalhos.musicaAnterior || atalhos._musicaAnterior
-	hotkeys(key, prevSongHandle)
+	hotkeys(key, Musica.prevSongHandle)
 	atualizarAtalhoNoInput("#ipt_keyword_prev_music", key)
 }
 const definirAtalhoProximaMusica = () => {
 	const key = atalhos.proximaMusica || atalhos._proximaMusica
-	hotkeys(key, nextSongHandle)
+	hotkeys(key, Musica.nextSongHandle)
 	atualizarAtalhoNoInput("#ipt_keyword_next_music", key)
 }
 const definirAtalhoAbreConfig = () => {
