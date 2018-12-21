@@ -64,24 +64,7 @@ const fmInfoHandle = e => {
 	switch (e.target.className) {
 		case 'ipt_social_media':
 		case 'ipt_social_media_secundary':
-			const parent = e.target.parentElement
-			if (e.target.value == "" && ) {// TODO: Verificr se o elemento lateral está vazio, para então excluir a linha
-			} else if (e.target.value != "" && parent.nextElementSibling == null) {
-				const row = parent.cloneNode(true)
-				console.log(row)
-				row.firstElementChild.value = ""
-				row.lastElementChild.value = ""
-				parent.insertAdjacentElement('afterEnd', row)
-			}
-			const index = Array(...parent.parentElement.children).indexOf(parent)
-			let li = document.querySelector(`#${keys[e.target.className]} .index-${index}`)
-			if (li === null) {
-				li = document.createElement("li")
-				li.classList.add(`index-${index}`)
-				document.querySelector(`#${keys[e.target.className]}`).appendChild(li)
-			}
-			li.innerText = e.target.value
-			li.classList.add("icon-fb") // TODO: Verificar qual a rede social
+			socialMediaHandle(e, keys);
 			break
 
 		default:
@@ -141,6 +124,47 @@ const coolDown = end => {
 	document.querySelector("#s_count").setAttribute("data-text", text.replace(/<\/?[^>]+(>|$)/g, ""))
 	
 	if (end <= now) stopCoolDown()
+}
+
+function socialMediaHandle(e, keys) {
+	const parent = e.target.parentElement
+	const index = Array(...parent.parentElement.children).indexOf(parent)
+	const emptySibling = (e.target.previousElementSibling && e.target.previousElementSibling.value == "") || (e.target.nextElementSibling && e.target.nextElementSibling.value == "")
+	const li_query = `#${keys[e.target.className]} .index-${index}`
+	if (e.target.value == "") {
+		if (emptySibling) parent.parentElement.removeChild(parent)
+
+		const li = document.querySelector(li_query)
+		if (li) {
+			li.parentElement.removeChild(li)
+		}
+	}
+	else {
+		if (e.target.value != "" && parent.nextElementSibling == null) {
+			const row = parent.cloneNode(true)
+			row.firstElementChild.value = ""
+			row.lastElementChild.value = ""
+			parent.insertAdjacentElement('afterEnd', row)
+		}
+		let li = document.querySelector(li_query)
+		if (li === null) {
+			li = document.createElement("li")
+			li.classList.add(`index-${index}`)
+			document.querySelector(`#${keys[e.target.className]}`).appendChild(li)
+		}
+		li.innerText = getShortUrl(e.target.value)
+		li.classList.add(getWebSiteName(e.target.value))
+	}
+}
+function getShortUrl(url) {
+	const pattern = /(\w+\.(?:com|net|tv|com\.br|me).*)/ig
+	const result = pattern.exec(url)
+	return result[1]
+}
+function getWebSiteName(url) {
+	const pattern = /(\w+).(?:com|net|tv|com\.br|me)/ig
+	const result = pattern.exec(url)
+	return result[1]
 }
 
 function onYouTubeIframeAPIReady() {
