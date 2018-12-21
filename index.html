@@ -53,9 +53,16 @@
                             <article>
                                 <form id="fm_info">
                                     <label for="#ipt_org">Organizadores</label>
-                                    <input type="text" id="ipt_org" title="Quem está organizando o evento" placeholder="EPiC - UFSCar" tabindex="1">
+                                    <input type="text" id="ipt_org" title="Quem está organizando o evento" placeholder="Quem está organizando o evento" tabindex="1">
                                     <label for="#ipt_title">Evento</label>
-                                    <input type="text" id="ipt_title" title="Nome do evento" placeholder="Começaremos em breve" tabindex="2" />
+                                    <input type="text" id="ipt_title" title="Nome do evento" placeholder="Nome do evento" tabindex="2" />
+                                    <label for="#ipt_link_hotpage">Hotpage</label>
+                                    <input type="url" id="ipt_link_hotpage" title="Link para sua hotpage" placeholder="Link para sua hotpage" />
+                                    <label for="#ipt_social_media">Redes sociais</label>
+                                    <div class="social_media_row">
+                                        <input type="url" class="ipt_social_media" title="Link da sua rede social" placeholder="Link da sua rede social" />
+                                        <input type="url" class="ipt_social_media_secundary" title="Rede social secundária" placeholder="Rede social secundária" />
+                                    </div>
                                 </form>
                             </article>
                         </section>
@@ -266,9 +273,12 @@
     </aside>
     <main>
         <div id="player" tabindex="-1"></div>
+        <ul id="ul_social_medias"></ul>
+        <ul id="ul_social_medias_secundary"></ul>
         <h6 id="h_org"></h6>
         <h1 id="h_title"></h1>
         <span id="s_count"></span>
+        <a id="a_hotpage" href="#"></a>
         <button id="btn_open_config"><i class="fas fa-cog fa-spin"></i></button>
     </main>
     <script src="./libs/youtube/iframe_api.js" async></script>

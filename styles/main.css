@@ -164,6 +164,16 @@ form, fieldset {
 	display: flex;
 	flex-direction: column;
 }
+#fm_info .social_media_row {
+	display: flex;
+	flex-direction: row;
+	margin: 5px -5px;
+}
+#fm_info .social_media_row > * {
+	flex-basis: 0;
+	flex-grow: 1;
+	margin: 0 5px;
+}
 #config_count article {
 	display: flex;
 	flex-direction: row;

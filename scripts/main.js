@@ -53,13 +53,42 @@ const fmAddTimeHandle = () => {
 const fmInfoHandle = e => {
 	e.preventDefault()
 	
-	const ids = {
+	const keys = {
 		'ipt_org': 'h_org',
-		'ipt_title': 'h_title'
+		'ipt_title': 'h_title',
+		'ipt_social_media': 'ul_social_medias',
+		'ipt_social_media_secundary': 'ul_social_medias_secundary',
+		'ipt_link_hotpage': 'a_hotpage'
+	}
+
+	switch (e.target.className) {
+		case 'ipt_social_media':
+		case 'ipt_social_media_secundary':
+			const parent = e.target.parentElement
+			if (e.target.value == "" && ) {// TODO: Verificr se o elemento lateral está vazio, para então excluir a linha
+			} else if (e.target.value != "" && parent.nextElementSibling == null) {
+				const row = parent.cloneNode(true)
+				console.log(row)
+				row.firstElementChild.value = ""
+				row.lastElementChild.value = ""
+				parent.insertAdjacentElement('afterEnd', row)
+			}
+			const index = Array(...parent.parentElement.children).indexOf(parent)
+			let li = document.querySelector(`#${keys[e.target.className]} .index-${index}`)
+			if (li === null) {
+				li = document.createElement("li")
+				li.classList.add(`index-${index}`)
+				document.querySelector(`#${keys[e.target.className]}`).appendChild(li)
+			}
+			li.innerText = e.target.value
+			li.classList.add("icon-fb") // TODO: Verificar qual a rede social
+			break
+
+		default:
+			document.querySelector(`#${keys[e.target.id]}`).innerHTML = e.target.value
+			document.querySelector(`#${keys[e.target.id]}`).setAttribute("data-text", e.target.value)
 	}
 	
-	document.querySelector(`#${ids[e.target.id]}`).innerHTML = e.target.value
-	document.querySelector(`#${ids[e.target.id]}`).setAttribute("data-text", e.target.value)
 }
 
 var countInterval = null,
