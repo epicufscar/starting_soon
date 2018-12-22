@@ -24,7 +24,7 @@ var SS_Options = SS_Options || {};
 			element.addEventListener("focusout", THIS.HotKeys.Handles.iptAlterarAtalhoHandleOnFocusOut)
 		})
 		THIS.HotKeys.init()
-		Musica.onLoad()
+		THIS.Music.init()
 	}
 
 	var Handles = {};
@@ -209,5 +209,5 @@ var SS_Options = SS_Options || {};
 window.addEventListener("load", SS_Options.onDocumentLoadHandle)
 
 function onYouTubeIframeAPIReady() {
-	Musica.YTAPIReady()
+	SS_Options.Music.Handlers.ytAPIReadyHandle()
 }

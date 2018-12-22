@@ -124,22 +124,22 @@ var SS_Options = SS_Options || {};
 			
 			const definirAtalhoTocarMusica = () => {
 				const key = atalhos.tocarMusica || atalhos._tocarMusica
-				hotkeys(key, Musica.playSongHandle)
+				hotkeys(key, SS_Options.Music.Handlers.playSongHandle)
 				atualizarAtalhoNoInput("#ipt_keyword_play_music", key)
 			}
 			const definirAtalhoPausarMusica = () => {
 				const key = atalhos.pausarMusica || atalhos._pausarMusica
-				hotkeys(key, Musica.pauseSongHandle)
+				hotkeys(key, SS_Options.Music.Handlers.pauseSongHandle)
 				atualizarAtalhoNoInput("#ipt_keyword_pause_music", key)
 			}
 			const definirAtalhoMusicaAnterior = () => {
 				const key = atalhos.musicaAnterior || atalhos._musicaAnterior
-				hotkeys(key, Musica.prevSongHandle)
+				hotkeys(key, SS_Options.Music.Handlers.prevSongHandle)
 				atualizarAtalhoNoInput("#ipt_keyword_prev_music", key)
 			}
 			const definirAtalhoProximaMusica = () => {
 				const key = atalhos.proximaMusica || atalhos._proximaMusica
-				hotkeys(key, Musica.nextSongHandle)
+				hotkeys(key, SS_Options.Music.Handlers.nextSongHandle)
 				atualizarAtalhoNoInput("#ipt_keyword_next_music", key)
 			}
 			const definirAtalhoAbreConfig = () => {
