@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener("load", () => {
 	document.querySelectorAll("form").forEach(element => {
 		element.addEventListener("submit", e => 	e.preventDefault())
 	})
@@ -8,8 +8,6 @@ window.onload = () => {
 	document.querySelector("#fm_time").addEventListener("submit", fmTimeHandle)
 	
 	document.querySelector("#fm_add_time").addEventListener("submit", fmAddTimeHandle)
-	
-	document.querySelector("#fm_song").addEventListener("submit", fmLoadPlaylistHandle)
 
 	document.querySelector("#fm_theme").addEventListener("change", fmThemeHandle)
 
@@ -29,8 +27,8 @@ window.onload = () => {
 		element.addEventListener("focusout", iptAlterarAtalhoHandleOnFocusOut)
 	})
 
-	Musica.mostrarSugestoes()
-}
+	Musica.onLoad()
+})
 const count_text = "Começaremos em breve!"
 
 const fmAddTimeHandle = () => {
@@ -55,13 +53,25 @@ const fmAddTimeHandle = () => {
 const fmInfoHandle = e => {
 	e.preventDefault()
 	
-	const ids = {
+	const keys = {
 		'ipt_org': 'h_org',
-		'ipt_title': 'h_title'
+		'ipt_title': 'h_title',
+		'ipt_social_media': 'ul_social_medias',
+		'ipt_social_media_secundary': 'ul_social_medias_secundary',
+		'ipt_link_hotpage': 'a_hotpage'
+	}
+
+	switch (e.target.className) {
+		case 'ipt_social_media':
+		case 'ipt_social_media_secundary':
+			socialMediaHandle(e, keys);
+			break
+
+		default:
+			document.querySelector(`#${keys[e.target.id]}`).innerHTML = e.target.value
+			document.querySelector(`#${keys[e.target.id]}`).setAttribute("data-text", e.target.value)
 	}
 	
-	document.querySelector(`#${ids[e.target.id]}`).innerHTML = e.target.value
-	document.querySelector(`#${ids[e.target.id]}`).setAttribute("data-text", e.target.value)
 }
 
 var countInterval = null,
@@ -116,89 +126,49 @@ const coolDown = end => {
 	if (end <= now) stopCoolDown()
 }
 
-var player;
-const fmLoadPlaylistHandle = () => {
-	const ipt_element = document.querySelector("#ipt_playlist_url"),
-		url = new URL(ipt_element.value),
-		searchParams = new URLSearchParams(url.search),
-		playlist_id = searchParams.get('list'),
-		index_playing = searchParams.get('index'),
-		video_id = searchParams.get('v')
+function socialMediaHandle(e, keys) {
+	const parent = e.target.parentElement
+	const index = Array(...parent.parentElement.children).indexOf(parent)
+	const emptySibling = (e.target.previousElementSibling && e.target.previousElementSibling.value == "") || (e.target.nextElementSibling && e.target.nextElementSibling.value == "")
+	const li_query = `#${keys[e.target.className]} .index-${index}`
+	if (e.target.value == "") {
+		if (emptySibling) parent.parentElement.removeChild(parent)
 
-	if (playlist_id) {
-		player.loadPlaylist({
-			list: playlist_id,
-			index: index_playing || 0
-		})
-		player.setLoop(true)
-
-		// document.querySelector("#btn_prev").disabled = false
-		// document.querySelector("#btn_next").disabled = false
-	} else if (video_id) {
-		player.loadVideoById({
-			videoId: video_id
-		})
-		//TODO: setLoop é apenas para listas
-		//player.setLoop(true)
-
-		// document.querySelector("#btn_prev").disabled = true
-		// document.querySelector("#btn_next").disabled = true
+		const li = document.querySelector(li_query)
+		if (li) {
+			li.parentElement.removeChild(li)
+		}
 	}
+	else {
+		if (e.target.value != "" && parent.nextElementSibling == null) {
+			const row = parent.cloneNode(true)
+			row.firstElementChild.value = ""
+			row.lastElementChild.value = ""
+			parent.insertAdjacentElement('afterEnd', row)
+		}
+		let li = document.querySelector(li_query)
+		if (li === null) {
+			li = document.createElement("li")
+			li.classList.add(`index-${index}`)
+			document.querySelector(`#${keys[e.target.className]}`).appendChild(li)
+		}
+		li.innerText = getShortUrl(e.target.value)
+		li.classList.add(getWebSiteName(e.target.value))
+	}
+}
+function getShortUrl(url) {
+	const pattern = /(\w+\.(?:com|net|tv|com\.br|me).*)/ig
+	const result = pattern.exec(url)
+	return result[1]
+}
+function getWebSiteName(url) {
+	const pattern = /(\w+).(?:com|net|tv|com\.br|me)/ig
+	const result = pattern.exec(url)
+	return result[1]
 }
 
 function onYouTubeIframeAPIReady() {
-	player = new YT.Player('player', {
-		// height: '1',
-		// width: '1',
-		events: {
-			'onReady': onPlayerReady,
-			'onStateChange': onPlayerStateChange,
-			'onError': onPlayerError
-		}
-	});
-}
-function onPlayerReady() {
-	document.querySelector("#fm_song fieldset").disabled = false
-	player.setVolume(100)
-	player.setPlaybackQuality('small')
-}
-function onPlayerStateChange(e) {
-	// document.querySelector("#btn_play_pause").value = e.data == YT.PlayerState.PLAYING ? "Pausar" : e.data == YT.PlayerState.BUFFERING ? "Carregando" : "Reproduzir"
-
-	// document.querySelector("#btn_play_pause").disabled = e.data == YT.PlayerState.BUFFERING
-}
-function onPlayerError(e) {
-	nextSongHandle()
-	switch (e.data) {
-		case 2:
-			throw Error("Erro no player do YouTube: A solicitação contém um valor de parâmetro inválido. Por exemplo, este erro ocorre se você especificar um ID de vídeo que não tem 11 caracteres, ou se o ID de vídeo contém caracteres inválidos, como pontos de exclamação ou asteriscos.")
-		case 5:
-			throw Error("Erro no player do YouTube: O conteúdo solicitado não pode ser reproduzido em um player HTML5, ou ocorreu outro erro relacionado ao player HTML5.")
-		case 100:
-			throw Error("Erro no player do YouTube: O vídeo solicitado não foi encontrado. Esse erro ocorrerá quando um vídeo tiver sido removido (por qualquer motivo) ou marcado como privado.")
-		case 101:
-		case 150:
-			throw Error("Erro no player do YouTube: O proprietário do vídeo solicitado não permite que ele seja reproduzido em players incorporados.")
-		default:
-			throw Error("Ocorrou um erro desconhecido no player do YouTube.")
-	}
-}
-
-const prevSongHandle = () => {
-	player.previousVideo()
-}
-const playSongHandle = () => {
-	if (player.getPlayerState() != YT.PlayerState.PLAYING) {
-		player.playVideo()
-	}
-}
-const pauseSongHandle = () => {
-	if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-		player.pauseVideo()
-	}
-}
-const nextSongHandle = () => {
-	player.nextVideo()
+	Musica.YTAPIReady()
 }
 
 const fmThemeHandle = e => {
