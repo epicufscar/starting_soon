@@ -2,29 +2,28 @@ var SS_Options = SS_Options || {};
 (function() { // SS_Options namespace
 	var THIS = this
 	var count_text = "Começaremos em breve!"
-	var HotKeys = {};
 	function init() {
 		document.querySelectorAll("form").forEach(element => {
 			element.addEventListener("submit", e => e.preventDefault())
 		})
 		
-	document.querySelector("#fm_info").addEventListener("change", fmInfoHandle)
+		document.querySelector("#fm_info").addEventListener("change", Handles.fmInfoHandle)
+		document.querySelector("#fm_time").addEventListener("submit", Handles.fmTimeHandle)
+		document.querySelector("#fm_add_time").addEventListener("submit", Handles.fmAddTimeHandle)
+		document.querySelector("#fm_theme").addEventListener("change", Handles.fmThemeHandle)
 	
-	document.querySelector("#fm_time").addEventListener("submit", fmTimeHandle)
-	document.querySelector("#fm_add_time").addEventListener("submit", fmAddTimeHandle)
-	document.querySelector("#fm_theme").addEventListener("change", fmThemeHandle)
 		document.querySelector("#s_count").innerText = count_text
 		document.querySelector("#s_count").setAttribute("data-text", count_text)
 	
-	document.querySelector("#btn_exit_config").addEventListener("click", atalhoFecharConfigHandle)
-	document.querySelector("#btn_open_config").addEventListener("click", atalhoAbrirConfigHandle)
-	atalhoAbrirConfigHandle()
+		document.querySelector("#btn_exit_config").addEventListener("click", THIS.HotKeys.Handles.atalhoFecharConfigHandle)
+		document.querySelector("#btn_open_config").addEventListener("click", THIS.HotKeys.Handles.atalhoAbrirConfigHandle)
+		THIS.HotKeys.Handles.atalhoAbrirConfigHandle()
 	
 		document.querySelectorAll("#fm_atal input").forEach(element => {
-		element.addEventListener("focusin", iptAlterarAtalhoHandleOnFocusIn)
-		element.addEventListener("focusout", iptAlterarAtalhoHandleOnFocusOut)
+			element.addEventListener("focusin", THIS.HotKeys.Handles.iptAlterarAtalhoHandleOnFocusIn)
+			element.addEventListener("focusout", THIS.HotKeys.Handles.iptAlterarAtalhoHandleOnFocusOut)
 		})
-
+		THIS.HotKeys.init()
 		Musica.onLoad()
 	}
 
