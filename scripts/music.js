@@ -15,11 +15,11 @@ var SS_Options = SS_Options || {};
 		}
 
 		function setupHandlers() {
-			document.querySelector("#fm_song").addEventListener("submit", THIS.Handlers.fmLoadPlaylistHandle)
+			document.querySelector("#fm_song").addEventListener("submit", THIS.Handlers.fmLoadPlaylistHandler)
 
-			document.querySelector("#btn_playlist_prev").addEventListener("click", THIS.Handlers.prevSongHandle)
-			document.querySelector("#btn_playlist_play_pause").addEventListener("click", THIS.Handlers.playPauseSongHandle)
-			document.querySelector("#btn_playlist_next").addEventListener("click", THIS.Handlers.nextSongHandle)
+			document.querySelector("#btn_playlist_prev").addEventListener("click", THIS.Handlers.prevSongHandler)
+			document.querySelector("#btn_playlist_play_pause").addEventListener("click", THIS.Handlers.playPauseSongHandler)
+			document.querySelector("#btn_playlist_next").addEventListener("click", THIS.Handlers.nextSongHandler)
 		}
 
 		function mostrarSugestoes() {
@@ -109,7 +109,7 @@ var SS_Options = SS_Options || {};
 
 		this.Handlers = {};
 		(function() {
-			this.fmLoadPlaylistHandle = () => {
+			this.fmLoadPlaylistHandler = () => {
 				document.querySelector("#fm_song > fieldset").disabled = true;
 						
 				document.querySelector("#playlist_details").classList.add("hide");
@@ -236,7 +236,7 @@ var SS_Options = SS_Options || {};
 				}
 			}).apply(Infos)
 
-			this.ytAPIReadyHandle = () => {
+			this.ytAPIReadyHandler = () => {
 				ytapiready = true
 				if (documentready) loadPlayer()
 			}
@@ -275,7 +275,7 @@ var SS_Options = SS_Options || {};
 			}
 		
 			this.onPlayerErrorHandler = (e) => {
-				this.nextSongHandle()
+				this.nextSongHandler()
 				switch (e.data) {
 					case 2:
 						throw Error("Erro no player do YouTube: A solicitação contém um valor de parâmetro inválido. Por exemplo, este erro ocorre se você especificar um ID de vídeo que não tem 11 caracteres, ou se o ID de vídeo contém caracteres inválidos, como pontos de exclamação ou asteriscos.")
@@ -291,27 +291,27 @@ var SS_Options = SS_Options || {};
 				}
 			}
 
-			this.prevSongHandle = () => {
+			this.prevSongHandler = () => {
 				player.previousVideo()
 			}
-			this.playSongHandle = () => {
+			this.playSongHandler = () => {
 				if (player.getPlayerState() != YT.PlayerState.PLAYING) {
 					player.playVideo()
 				}
 			}
-			this.pauseSongHandle = () => {
+			this.pauseSongHandler = () => {
 				if (player.getPlayerState() == YT.PlayerState.PLAYING) {
 					player.pauseVideo()
 				}
 			}
-			this.playPauseSongHandle = () => {
+			this.playPauseSongHandler = () => {
 				if (player.getPlayerState() == YT.PlayerState.PLAYING) {
 					player.pauseVideo()
 				} else {
 					player.playVideo()
 				}
 			}
-			this.nextSongHandle = () => {
+			this.nextSongHandler = () => {
 				player.nextVideo()
 			}
 		}).apply(this.Handlers)

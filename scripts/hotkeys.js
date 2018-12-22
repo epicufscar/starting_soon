@@ -14,7 +14,7 @@ var SS_Options = SS_Options || {};
 			novos_atalhos = {},
 			THIS = this
 
-		this.Handles = {};
+		this.Handlers = {};
 		(function() {
 			this.iptAlterarAtalhoHandleOnFocusIn = e => {
 				THIS.gravando = e.target
@@ -29,7 +29,7 @@ var SS_Options = SS_Options || {};
 				DefinirAtalhos.definirTodos()
 			}
 			
-			this.atalhoFecharConfigHandle = () => {
+			this.atalhoFecharConfigHandler = () => {
 				const details = document.querySelector("details")
 				if (details.hasAttribute("open")) {
 					document.querySelector("summary").click()
@@ -38,7 +38,7 @@ var SS_Options = SS_Options || {};
 					window.location = "#"
 				}
 			}
-			this.atalhoAbrirConfigHandle = (focar = true) => {
+			this.atalhoAbrirConfigHandler = (focar = true) => {
 				const details = document.querySelector("details")
 				if (!details.hasAttribute("open")) {
 					document.querySelector("summary").click()
@@ -48,10 +48,10 @@ var SS_Options = SS_Options || {};
 				}
 			}
 			
-			this.atalhoMenuNavHandle = (link_id_ref) => {
+			this.atalhoMenuNavHandler = (link_id_ref) => {
 				if (THIS.gravando) return
 				if (hotkeys.getScope() == "main")
-					this.atalhoAbrirConfigHandle(false)
+					this.atalhoAbrirConfigHandler(false)
 				document.querySelector(`*[href='${link_id_ref}']`).click()
 				focarNoElemento(`${link_id_ref} input`)
 			}
@@ -59,7 +59,7 @@ var SS_Options = SS_Options || {};
 				// Para o evento não ser passado pro input
 				setTimeout(() => document.querySelector(query).focus(), 0)
 			}
-		}).apply(this.Handles)
+		}).apply(this.Handlers)
 
 		this.init = () => {
 			hotkeys("*", 'gravando', capturarTeclas)
@@ -114,7 +114,7 @@ var SS_Options = SS_Options || {};
 			}
 			
 			function definirAtalhoMenuNav(key, scope, link_id_ref, ipt_id_ref) {
-				hotkeys(key, scope, () => THIS.Handles.atalhoMenuNavHandle(link_id_ref))
+				hotkeys(key, scope, () => THIS.Handlers.atalhoMenuNavHandler(link_id_ref))
 				atualizarAtalhoNoInput(ipt_id_ref, key)
 			}
 			
@@ -124,32 +124,32 @@ var SS_Options = SS_Options || {};
 			
 			const definirAtalhoTocarMusica = () => {
 				const key = atalhos.tocarMusica || atalhos._tocarMusica
-				hotkeys(key, SS_Options.Music.Handlers.playSongHandle)
+				hotkeys(key, SS_Options.Music.Handlers.playSongHandler)
 				atualizarAtalhoNoInput("#ipt_keyword_play_music", key)
 			}
 			const definirAtalhoPausarMusica = () => {
 				const key = atalhos.pausarMusica || atalhos._pausarMusica
-				hotkeys(key, SS_Options.Music.Handlers.pauseSongHandle)
+				hotkeys(key, SS_Options.Music.Handlers.pauseSongHandler)
 				atualizarAtalhoNoInput("#ipt_keyword_pause_music", key)
 			}
 			const definirAtalhoMusicaAnterior = () => {
 				const key = atalhos.musicaAnterior || atalhos._musicaAnterior
-				hotkeys(key, SS_Options.Music.Handlers.prevSongHandle)
+				hotkeys(key, SS_Options.Music.Handlers.prevSongHandler)
 				atualizarAtalhoNoInput("#ipt_keyword_prev_music", key)
 			}
 			const definirAtalhoProximaMusica = () => {
 				const key = atalhos.proximaMusica || atalhos._proximaMusica
-				hotkeys(key, SS_Options.Music.Handlers.nextSongHandle)
+				hotkeys(key, SS_Options.Music.Handlers.nextSongHandler)
 				atualizarAtalhoNoInput("#ipt_keyword_next_music", key)
 			}
 			const definirAtalhoAbreConfig = () => {
 				const key = atalhos.abrirConfig || atalhos._abrirConfig
-				hotkeys(key, "main", () => THIS.Handles.atalhoAbrirConfigHandle(false))
+				hotkeys(key, "main", () => THIS.Handlers.atalhoAbrirConfigHandler(false))
 				atualizarAtalhoNoInput("#ipt_keyword_open_config", key)
 			}
 			const definirAtalhoFechaConfig = () => {
 				const key = atalhos.fecharConfig || atalhos._fecharConfig
-				hotkeys(key, "config", THIS.Handles.atalhoFecharConfigHandle)
+				hotkeys(key, "config", THIS.Handlers.atalhoFecharConfigHandler)
 				atualizarAtalhoNoInput("#ipt_keyword_close_config", key)
 				document.querySelector("#btn_exit_config ~ span").innerText = String(key).toUpperCase()
 			}

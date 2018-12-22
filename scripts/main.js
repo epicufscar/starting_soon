@@ -7,31 +7,35 @@ var SS_Options = SS_Options || {};
 			element.addEventListener("submit", e => e.preventDefault())
 		})
 		
-		document.querySelector("#fm_info").addEventListener("change", Handles.fmInfoHandle)
-		document.querySelector("#fm_time").addEventListener("submit", Handles.fmTimeHandle)
-		document.querySelector("#fm_add_time").addEventListener("submit", Handles.fmAddTimeHandle)
-		document.querySelector("#fm_theme").addEventListener("change", Handles.fmThemeHandle)
+		document.querySelector("#fm_info").addEventListener("change", THIS.Handlers.fmInfoHandler)
+		document.querySelector("#fm_time").addEventListener("submit", THIS.Handlers.fmTimeHandler)
+		document.querySelector("#fm_add_time").addEventListener("submit", THIS.Handlers.fmAddTimeHandler)
+		document.querySelector("#fm_theme").addEventListener("change", THIS.Handlers.fmThemeHandler)
 	
 		document.querySelector("#s_count").innerText = count_text
 		document.querySelector("#s_count").setAttribute("data-text", count_text)
 	
-		document.querySelector("#btn_exit_config").addEventListener("click", THIS.HotKeys.Handles.atalhoFecharConfigHandle)
-		document.querySelector("#btn_open_config").addEventListener("click", THIS.HotKeys.Handles.atalhoAbrirConfigHandle)
-		THIS.HotKeys.Handles.atalhoAbrirConfigHandle()
+		document.querySelector("#btn_exit_config").addEventListener("click", THIS.HotKeys.Handlers.atalhoFecharConfigHandler)
+		document.querySelector("#btn_open_config").addEventListener("click", THIS.HotKeys.Handlers.atalhoAbrirConfigHandler)
+		THIS.HotKeys.Handlers.atalhoAbrirConfigHandler()
 	
 		document.querySelectorAll("#fm_atal input").forEach(element => {
-			element.addEventListener("focusin", THIS.HotKeys.Handles.iptAlterarAtalhoHandleOnFocusIn)
-			element.addEventListener("focusout", THIS.HotKeys.Handles.iptAlterarAtalhoHandleOnFocusOut)
+			element.addEventListener("focusin", THIS.HotKeys.Handlers.iptAlterarAtalhoHandleOnFocusIn)
+			element.addEventListener("focusout", THIS.HotKeys.Handlers.iptAlterarAtalhoHandleOnFocusOut)
 		})
 		THIS.HotKeys.init()
 		THIS.Music.init()
 	}
 
-	var Handles = {};
-	(function() { // Handles namespace
-		var SocialMediaHandles = {};
-		(function() { // SocialMediaHandles namespace
-			this.socialMediaHandle = (e, keys) => {
+	this.Handlers = {};
+	(function() { // Handlers namespace
+		this.onDocumentLoadHandler = function () {
+			init()
+		}
+
+		var SocialMediaHandlers = {};
+		(function() { // SocialMediaHandlers namespace
+			this.socialMediaHandler = (e, keys) => {
 				const parent = e.target.parentElement
 				const index = Array(...parent.parentElement.children).indexOf(parent)
 				const emptySibling = (e.target.previousElementSibling && e.target.previousElementSibling.value == "") || (e.target.nextElementSibling && e.target.nextElementSibling.value == "")
@@ -71,8 +75,8 @@ var SS_Options = SS_Options || {};
 				const result = pattern.exec(url)
 				return result[1]
 			}			
-		}).apply(SocialMediaHandles)
-		this.fmInfoHandle = function(e) {
+		}).apply(SocialMediaHandlers)
+		this.fmInfoHandler = function(e) {
 			e.preventDefault()
 			
 			const keys = {
@@ -86,7 +90,7 @@ var SS_Options = SS_Options || {};
 			switch (e.target.className) {
 				case 'ipt_social_media':
 				case 'ipt_social_media_secundary':
-					SocialMediaHandles.socialMediaHandle(e, keys);
+					SocialMediaHandlers.socialMediaHandler(e, keys);
 					break
 		
 				default:
@@ -126,7 +130,7 @@ var SS_Options = SS_Options || {};
 				if (end <= now) this.stopCountDown()
 			}
 		}).apply(CountDown)
-		this.fmTimeHandle = e => {
+		this.fmTimeHandler = e => {
 			e.preventDefault()
 			
 			if (!CountDown.countInterval) {
@@ -149,7 +153,7 @@ var SS_Options = SS_Options || {};
 				CountDown.stopCountDown()
 			}
 		}
-		this.fmAddTimeHandle = () => {
+		this.fmAddTimeHandler = () => {
 			clearTimeout(CountDown.endTimeMessage) // Precisa parar o timeout aqui pois quando chamar o stopCountDown, ele criará um novo timeout e o anterior continuará sendo executado mesmo que o novo seja parado dentro do fmTimeHandle
 			CountDown.stopCountDown()
 			
@@ -168,7 +172,7 @@ var SS_Options = SS_Options || {};
 			document.querySelector("#btn_start_stop_time").click()
 		}
 
-		this.fmThemeHandle = e => {
+		this.fmThemeHandler = e => {
 			const theme_name = e.target.value,
 				style_id = "theme_style",
 				script_id = "theme_script"
@@ -199,15 +203,11 @@ var SS_Options = SS_Options || {};
 				if (script !== null) script.parentElement.removeChild(script)
 			}
 		}
-	}).apply(Handles)
-
-	this.onDocumentLoadHandle = function () {
-		init()	
-	}
+	}).apply(this.Handlers)
 }).apply(SS_Options)
 
-window.addEventListener("load", SS_Options.onDocumentLoadHandle)
+window.addEventListener("load", SS_Options.Handlers.onDocumentLoadHandler)
 
 function onYouTubeIframeAPIReady() {
-	SS_Options.Music.Handlers.ytAPIReadyHandle()
+	SS_Options.Music.Handlers.ytAPIReadyHandler()
 }
