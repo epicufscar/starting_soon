@@ -1,9 +1,31 @@
-html {
-	overflow: hidden;
+html { overflow: hidden; }
+body { margin: 0; }
+
+p {
+	margin: 5px 0 0;
+	font-size: 8pt;
+	color: #b4b6b9;
 }
 
-body {
+form,
+fieldset {
+	display: flex;
+	flex-direction: column;
+}
+fieldset {
+	padding: 0;
+	border: 0;
 	margin: 0;
+}
+
+hr {
+	width: 100%;
+	padding: 0;
+	border: 0;
+	border-top: solid 1px #e2e3e5;
+}
+section > hr {
+	margin: 30px 0;
 }
 
 /* Espaçamento do topo em âncoras quando são destacadas */
@@ -35,7 +57,8 @@ nav #our-media {
 	padding-right: 4px;
 	padding-left: 4px;
 }
-nav #our-media a:focus, nav #our-media a:active {
+nav #our-media a:focus,
+nav #our-media a:active {
 	color: #b9bbbe;
 	background-color: transparent;
 }
@@ -94,7 +117,8 @@ nav a {
 nav a:hover {
 	background-color: #e3e3e5;
 }
-nav a:focus, nav a:active {
+nav a:focus,
+nav a:active {
 	background-color: #7289da;
 	color: white;
 }
@@ -134,7 +158,8 @@ details > section > .container > section {
 details header {
 	margin-bottom: 8px;
 }
-details header > h1, details header > h2 {
+details header > h1,
+details header > h2 {
 	margin: 0 0 5px;
 	font-weight: bold;
 }
@@ -145,11 +170,6 @@ details header > h2 {
 	font-size: 8pt;
 	color: #a7abaf;
 }
-/* details header >  */p {
-	margin: 5px 0 0;
-	font-size: 8pt;
-	color: #b4b6b9;
-}
 
 article > section {
 	background-color: #f8f9f9;
@@ -159,243 +179,6 @@ article > section {
 	margin: 15px 0;
 }
 
-
-form, fieldset {
-	display: flex;
-	flex-direction: column;
-}
-#fm_info .social_media_row {
-	display: flex;
-	flex-direction: row;
-	margin: 5px -5px;
-}
-#fm_info .social_media_row > * {
-	flex-basis: 0;
-	flex-grow: 1;
-	margin: 0 5px;
-}
-#config_count article {
-	display: flex;
-	flex-direction: row;
-	margin: 0 -5px;
-}
-#config_count form {
-	flex-basis: 0;
-	flex-grow: 1;
-	margin: 0 5px;
-}
-#config_song .hide {
-	display: none;
-}
-#fm_song input[type=url] {
-	padding-right: 100px;
-}
-#fm_song section {
-	margin: 5px 0 0;
-    font-size: 8pt;
-    color: #b4b6b9;
-}
-#fm_song #sugestoes {
-	margin: 0;
-	padding: 0;
-	display: inline;
-	cursor: pointer;
-
-	--playlist_color: #000;
-	--song_color: #F44336;
-}
-#fm_song #sugestoes > .icones_clonaveis {
-	display: inline-block;
-    width: 0;
-    overflow: hidden;
-    height: 0;
-}
-#fm_song #sugestoes .sugestao_item:not(:hover) {
-	opacity: .3;
-}
-#fm_song #sugestoes .sugestao_item {
-    border: solid 1px black;
-    border-radius: 50px;
-	padding: 2px 10px 2px 2px;
-	margin: 2px;
-	display: inline-flex;
-	flex-direction: row;
-	color: #737c87;
-}
-#fm_song #sugestoes .sugestao_item .fa-layers {
-    background-color: black;
-    color: white;
-    border-radius: 50%;
-	padding: 3px;
-	margin-right: 4px;
-}
-#fm_song #sugestoes .sugestao_item.playlist {
-	border-color: var(--playlist_color)
-}
-#fm_song #sugestoes .sugestao_item.playlist .fa-layers {
-	background-color: var(--playlist_color)
-}
-#fm_song #sugestoes .sugestao_item.song {
-	border-color: var(--song_color)
-}
-#fm_song #sugestoes .sugestao_item.song .fa-layers {
-	background-color: var(--song_color)
-}
-#fm_song ~ #playlist_details #playlist_controls {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-#fm_song ~ #playlist_details #playlist_controls button {
-	border: none;
-	background: none;
-	margin: 5px;
-	color: #888;
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	outline: none;
-	box-sizing: border-box;
-	cursor: pointer;
-}
-#fm_song ~ #playlist_details ul {
-	margin: 0 -20px -23px;
-	padding: 0;
-	background-color: #f0f0f0;
-	max-height: calc(4 * 56px);
-	overflow: auto;
-}
-#fm_song ~ #playlist_details ul li {
-	list-style: none;
-	padding: 4px 8px 4px 0
-}
-#fm_song ~ #playlist_details ul li > a {
-	height: 56px;
-	overflow: hidden;
-	display: flex;
-	flex-direction: row;
-	text-decoration: none;
-}
-#fm_song ~ #playlist_details ul li > a > span {
-	width: 24px;
-	display: flex;
-	flex: none;
-    flex-direction: column;
-    text-align: center;
-	justify-content: center;
-	font-size: 12px;
-	font-weight: 400;
-    line-height: 1.5rem;
-	color: #888;
-}
-#fm_song ~ #playlist_details ul li > a > img {
-	height: 100%;
-	width: auto;
-}
-#fm_song ~ #playlist_details ul li > a > div {
-	padding-left: 8px;
-	width: 100%;
-}
-#fm_song ~ #playlist_details ul li > a > div > * {
-	width: 100%;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	color: #0a0a0a;
-}
-#fm_song ~ #playlist_details ul li > a > div > h3 {
-	font-size: 14px;
-	margin: 0px 0px 4px;
-}
-#fm_song ~ #playlist_details ul li > a > div > span {
-	font-size: 13px;
-	font-weight: 400;
-}
-#fm_theme {
-	display: flex;
-	flex-direction: row;
-	margin: -4px;
-}
-#fm_theme > * {
-	margin: 4px;
-}
-#fm_theme [type=radio] {
-	position: absolute;
-	opacity: 0;
-	width: 0;
-	height: 0;
-}
-#fm_theme [type=radio] + img {
-	cursor: pointer;
-}
-#fm_theme [type=radio]:checked + img {
-	border-color: #7289da;
-	background-color: #7289da;
-}
-#fm_theme .theme_preview:hover {
-	border-color: #72767d;
-}
-#fm_theme .theme_preview {
-	width: 80px;
-	height: 80px;
-	object-fit: cover;
-	padding: 3px;
-	border: 1px solid #dcddde;
-	border-radius: 3px;
-}
-#config_atal form {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: flex-end;
-	margin: 0 -5px;
-}
-#config_atal form > div {
-	flex: 0 0 50%;
-	max-width: calc(50% - 10px);
-	margin: 15px 5px;
-}
-#config_atal input {
-	cursor: pointer;
-}
-#config_atal input:hover, #config_atal input:focus, #config_atal input.gravando {
-	border-color: #f2bfbf;
-}
-#config_atal input.gravando {
-	color: #f04747;
-	animation: animacao_gravando .4s infinite alternate ease;
-}
-#config_atal input.gravando ~ button {
-	font-size: 0;
-}
-#config_atal input.gravando ~ button::before {
-	content: attr(data-text);
-	font-size: initial;
-}
-@keyframes animacao_gravando {
-	from {
-		box-shadow: 0 0 8px -3px rgb(255, 0, 0);
-	}
-	to {
-		box-shadow: 0 0 13px -3px rgb(255, 0, 0);
-	}
-}
-#config_atal input.gravando ~ button {
-	background-color: #f2e1e3 !important;
-	color: #f06847
-}
-#config_atal input:not(.gravando) ~ button {
-	pointer-events: none;
-}
-#config_atal input:not(.gravando):not(:hover) ~ button {
-	font-size: 0;
-}
-#config_atal input:not(.gravando):not(:hover) ~ button::after {
-    font-size: 15pt;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-	content: "\f11c";
-	color: #333;
-}
 form label {
 	color: #72767d;
 	font-size: 9pt;
@@ -415,7 +198,8 @@ form input, form button {
 	font-size: 12pt;
 	text-overflow: ellipsis;
 }
-input[type=submit], form button {
+input[type=submit],
+form button {
 	background-color: #edeef1 !important;
 	border: 0 !important;
 	color: #7f8993;
@@ -426,7 +210,8 @@ form input:disabled {
 	border-color: #eaeaea;
 	cursor: not-allowed;
 }
-form input:active, form input:focus {
+form input:active,
+form input:focus {
 	border-color: #7289da;
 }
 form input[type=time] {
@@ -436,29 +221,14 @@ form input[type=time] {
 form div.mesclar {
 	position: relative;
 }
-form div.mesclar input ~ input[type=submit], form div.mesclar input ~ button {
+form div.mesclar input ~ input[type=submit],
+form div.mesclar input ~ button {
 	position: absolute;
 	right: 0;
 	top: 0;
 	width: fit-content;
 	margin: 5px;
 	padding: 9px;
-}
-
-fieldset {
-	padding: 0;
-	border: 0;
-	margin: 0;
-}
-
-hr {
-	width: 100%;
-	padding: 0;
-	border: 0;
-	border-top: solid 1px #e2e3e5;
-}
-section > hr {
-	margin: 30px 0;
 }
 
 .container > div {

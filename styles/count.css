@@ -1,0 +1,13 @@
+#config_count article {
+	display: flex;
+	flex-direction: row;
+	margin: 0 -5px;
+}
+#config_count form {
+	flex-basis: 0;
+	flex-grow: 1;
+	margin: 0 5px;
+}
+#config_song .hide {
+	display: none;
+}

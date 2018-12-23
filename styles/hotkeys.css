@@ -1,0 +1,54 @@
+#config_atal form {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	margin: 0 -5px;
+}
+#config_atal form > div {
+	flex: 0 0 50%;
+	max-width: calc(50% - 10px);
+	margin: 15px 5px;
+}
+#config_atal input {
+	cursor: pointer;
+}
+#config_atal input:hover, #config_atal input:focus, #config_atal input.gravando {
+	border-color: #f2bfbf;
+}
+#config_atal input.gravando {
+	color: #f04747;
+	animation: animacao_gravando .4s infinite alternate ease;
+}
+#config_atal input.gravando ~ button {
+	font-size: 0;
+}
+#config_atal input.gravando ~ button::before {
+	content: attr(data-text);
+	font-size: initial;
+}
+@keyframes animacao_gravando {
+	from {
+		box-shadow: 0 0 8px -3px rgb(255, 0, 0);
+	}
+	to {
+		box-shadow: 0 0 13px -3px rgb(255, 0, 0);
+	}
+}
+#config_atal input.gravando ~ button {
+	background-color: #f2e1e3 !important;
+	color: #f06847
+}
+#config_atal input:not(.gravando) ~ button {
+	pointer-events: none;
+}
+#config_atal input:not(.gravando):not(:hover) ~ button {
+	font-size: 0;
+}
+#config_atal input:not(.gravando):not(:hover) ~ button::after {
+    font-size: 15pt;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+	content: "\f11c";
+	color: #333;
+}

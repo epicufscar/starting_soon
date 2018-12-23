@@ -1,0 +1,32 @@
+#fm_theme {
+	display: flex;
+	flex-direction: row;
+	margin: -4px;
+}
+#fm_theme > * {
+	margin: 4px;
+}
+#fm_theme [type=radio] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+#fm_theme [type=radio] + img {
+	cursor: pointer;
+}
+#fm_theme [type=radio]:checked + img {
+	border-color: #7289da;
+	background-color: #7289da;
+}
+#fm_theme .theme_preview:hover {
+	border-color: #72767d;
+}
+#fm_theme .theme_preview {
+	width: 80px;
+	height: 80px;
+	object-fit: cover;
+	padding: 3px;
+	border: 1px solid #dcddde;
+	border-radius: 3px;
+}
