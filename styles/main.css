@@ -1,3 +1,9 @@
+@import "./count.css";
+@import "./hotkeys.css";
+@import "./info.css";
+@import "./song.css";
+@import "./theme.css";
+
 html { overflow: hidden; }
 body { margin: 0; }
 
