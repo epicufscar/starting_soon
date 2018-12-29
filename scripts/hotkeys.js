@@ -1,3 +1,5 @@
+import Music from "./music.js"
+
 // Configurações do HOTKEYS
 hotkeys.filter = function(event) {
 	var tagName = (event.target || event.srcElement).tagName
@@ -99,11 +101,10 @@ var HotKeys = {};
 			definirAtalhoMenuNav(atalhos._detacarTema, 'all', "#config_tema", "#ipt_keyword_edit_theme")
 			definirAtalhoMenuNav(atalhos._detacarAtal, 'all', "#config_atal", "#ipt_keyword_edit_hotkey")
 			
-			// TODO: Rever como é definido os atalhos de música 
-			// definirAtalhoTocarMusica()
-			// definirAtalhoPausarMusica()
-			// definirAtalhoMusicaAnterior()
-			// definirAtalhoProximaMusica()
+			definirAtalhoTocarMusica()
+			definirAtalhoPausarMusica()
+			definirAtalhoMusicaAnterior()
+			definirAtalhoProximaMusica()
 		
 			// Escopo MAIN
 			definirAtalhoAbreConfig()
@@ -121,27 +122,26 @@ var HotKeys = {};
 			document.querySelector(selector).value = String(key).toLowerCase()
 		}
 		
-		// TODO: Rever como é definido os atalhos de música 
-		// const definirAtalhoTocarMusica = () => {
-		// 	const key = atalhos.tocarMusica || atalhos._tocarMusica
-		// 	hotkeys(key, SS_Options.Music.Handlers.playSongHandler)
-		// 	atualizarAtalhoNoInput("#ipt_keyword_play_music", key)
-		// }
-		// const definirAtalhoPausarMusica = () => {
-		// 	const key = atalhos.pausarMusica || atalhos._pausarMusica
-		// 	hotkeys(key, SS_Options.Music.Handlers.pauseSongHandler)
-		// 	atualizarAtalhoNoInput("#ipt_keyword_pause_music", key)
-		// }
-		// const definirAtalhoMusicaAnterior = () => {
-		// 	const key = atalhos.musicaAnterior || atalhos._musicaAnterior
-		// 	hotkeys(key, SS_Options.Music.Handlers.prevSongHandler)
-		// 	atualizarAtalhoNoInput("#ipt_keyword_prev_music", key)
-		// }
-		// const definirAtalhoProximaMusica = () => {
-		// 	const key = atalhos.proximaMusica || atalhos._proximaMusica
-		// 	hotkeys(key, SS_Options.Music.Handlers.nextSongHandler)
-		// 	atualizarAtalhoNoInput("#ipt_keyword_next_music", key)
-		// }
+		const definirAtalhoTocarMusica = () => {
+			const key = atalhos.tocarMusica || atalhos._tocarMusica
+			hotkeys(key, Music.Handlers.playSongHandler)
+			atualizarAtalhoNoInput("#ipt_keyword_play_music", key)
+		}
+		const definirAtalhoPausarMusica = () => {
+			const key = atalhos.pausarMusica || atalhos._pausarMusica
+			hotkeys(key, Music.Handlers.pauseSongHandler)
+			atualizarAtalhoNoInput("#ipt_keyword_pause_music", key)
+		}
+		const definirAtalhoMusicaAnterior = () => {
+			const key = atalhos.musicaAnterior || atalhos._musicaAnterior
+			hotkeys(key, Music.Handlers.prevSongHandler)
+			atualizarAtalhoNoInput("#ipt_keyword_prev_music", key)
+		}
+		const definirAtalhoProximaMusica = () => {
+			const key = atalhos.proximaMusica || atalhos._proximaMusica
+			hotkeys(key, Music.Handlers.nextSongHandler)
+			atualizarAtalhoNoInput("#ipt_keyword_next_music", key)
+		}
 		const definirAtalhoAbreConfig = () => {
 			const key = atalhos.abrirConfig || atalhos._abrirConfig
 			hotkeys(key, "main", () => THIS.Handlers.atalhoAbrirConfigHandler(false))
