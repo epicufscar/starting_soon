@@ -1,3 +1,4 @@
+import hotkeys from "../libs/hotkeys/hotkeys.common.min.js"
 import keyCodes from "./keycodes.js"
 import Music from "./music.js"
 
