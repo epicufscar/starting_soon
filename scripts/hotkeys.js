@@ -1,3 +1,4 @@
+import keyCodes from "./keycodes.js"
 import Music from "./music.js"
 
 // Configurações do HOTKEYS

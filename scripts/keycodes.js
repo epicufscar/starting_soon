@@ -172,3 +172,4 @@ const keyCodes = {
 	251: "unlock trackpad (Chrome/Edge)",
 	255: 'toggle touchpad',
 };
+export default keyCodes
