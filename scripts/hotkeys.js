@@ -3,7 +3,7 @@ import Music from "./music.js"
 // Configurações do HOTKEYS
 hotkeys.filter = function(event) {
 	var tagName = (event.target || event.srcElement).tagName
-	return !(tagName.isContentEditable || tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA') || event.key == "Escape" || SS_Options.HotKeys.gravando
+	return !(tagName.isContentEditable || tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA') || event.key == "Escape" || HotKeys.gravando
 }
 
 var HotKeys = {};

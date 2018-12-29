@@ -247,7 +247,6 @@ var Music = {};
 	
 		this.onPlayerStateChangeHandler = (e) => {
 			var btnIconClass = document.querySelector("#btn_playlist_play_pause").firstElementChild.classList
-			console.log(e.data)
 			switch (e.data) {
 				case YT.PlayerState.PLAYING:
 					btnIconClass.remove("fa-spinner")
