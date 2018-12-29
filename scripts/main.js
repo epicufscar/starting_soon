@@ -2,6 +2,6 @@ import SS_Options from './ss_options.js'
 
 window.addEventListener("load", SS_Options.Handlers.onDocumentLoadHandler)
 
-function onYouTubeIframeAPIReady() {
+window.onYouTubeIframeAPIReady = function () {
 	SS_Options.Music.Handlers.ytAPIReadyHandler()
 }
